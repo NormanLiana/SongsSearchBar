@@ -29,6 +29,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segueIdentifier = segue.identifier else { fatalError ("No identifier in segue") }
+        
+        switch segueIdentifier {
+        case "segueToDetailVC":
+            guard let songDetailVC = segue.destination as? DetailSongViewController
+                else { fatalError ("Unexpected segue") }
+            guard let selectedIndexPath = tableViewOutlet.indexPathForSelectedRow else { fatalError("No row selected")
+            }
+            songDetailVC.selectedCell = listOfSongs[selectedIndexPath.row]
+        default:
+            fatalError("Unexpected segue identifier")
+        }
+    }
 
     
     override func viewDidLoad() {
