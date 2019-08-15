@@ -8,7 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
+    @IBOutlet weak var tableViewOutlet: UITableView!
+    @IBOutlet weak var searchBarOutlet: UISearchBar!
     
     var listOfSongs = Song.loveSongs
     
@@ -17,6 +20,12 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "songCell") {
+            cell.textLabel?.text = listOfSongs[indexPath.row].name
+            cell.detailTextLabel?.text = listOfSongs[indexPath.row].artist
+            return cell
+        }
+        return UITableViewCell()
         
     }
     
@@ -24,6 +33,9 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViewOutlet.dataSource = self
+        tableViewOutlet.delegate = self
+  
         // Do any additional setup after loading the view, typically from a nib.
         
     }
