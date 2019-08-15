@@ -43,12 +43,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             fatalError("Unexpected segue identifier")
         }
     }
-
+    
+    var songSearchResults: [Song] {
+        get {
+            guard let searchString = searchString else {
+                return listOfSongs
+            }
+            guard searchString != "" else {
+                return listOfSongs
+            }
+            if let scopeTitles = searchBarOutlet.scopeButtonTitles {
+                let currentScopeIndex = searchBarOutlet.selectedScopeButtonIndex
+                switch scopeTitles[currentScopeIndex] {
+                case "Song":
+                    return listOfSongs.filter{$0.name.contains(searchString.lowercased())}
+                case "Artist":
+                    return listOfSongs.filter{$0.artist.contains(searchString.lowercased())}
+                default:
+                    return listOfSongs
+                }
+            }
+            return listOfSongs
+        }
+    }
+    var searchString: String? = nil {
+        didSet {
+            self.tableViewOutlet.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewOutlet.dataSource = self
         tableViewOutlet.delegate = self
+        searchBarOutlet.delegate = self
   
         // Do any additional setup after loading the view, typically from a nib.
         
