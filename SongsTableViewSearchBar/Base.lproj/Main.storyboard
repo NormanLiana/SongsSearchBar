@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="957.97101449275374" y="20.758928571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail Song View Controller-->
         <scene sceneID="5Tq-Ij-k2A">
             <objects>
-                <viewController id="Mk6-AP-Zcv" sceneMemberID="viewController">
+                <viewController id="Mk6-AP-Zcv" customClass="DetailSongViewController" customModule="SongsTableViewSearchBar" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rZD-Q7-s3L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -107,6 +107,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="546-XC-tVH"/>
                     </view>
+                    <connections>
+                        <outlet property="detailImageOutlet" destination="MF0-zb-Lqf" id="E99-wD-pmt"/>
+                        <outlet property="detailSongArtistOutlet" destination="MuF-VG-Cpz" id="Ixy-so-DHo"/>
+                        <outlet property="detailSongTitleOutlet" destination="lT8-6b-w33" id="iFV-ok-G2N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nCD-XA-8qz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
