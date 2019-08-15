@@ -9,12 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+    
+    var listOfSongs = Song.loveSongs
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return listOfSongs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        
     }
     
 
