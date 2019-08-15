@@ -10,12 +10,16 @@ import UIKit
 
 class DetailSongViewController: UIViewController {
 
+    var selectedCell: Song!
     
     @IBOutlet weak var detailSongArtistOutlet: UILabel!
     @IBOutlet weak var detailSongTitleOutlet: UILabel!
     @IBOutlet weak var detailImageOutlet: UIImageView!
     
     override func viewDidLoad() {
+        detailImageOutlet.image = UIImage(named: "loveSongs")
+        detailSongTitleOutlet.text = selectedCell.name
+        detailSongArtistOutlet.text = selectedCell.artist
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
