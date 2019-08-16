@@ -16,13 +16,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var listOfSongs = Song.loveSongs
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listOfSongs.count
+        return songSearchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "songCell") {
-            cell.textLabel?.text = listOfSongs[indexPath.row].name
-            cell.detailTextLabel?.text = listOfSongs[indexPath.row].artist
+            cell.textLabel?.text = songSearchResults[indexPath.row].name
+            cell.detailTextLabel?.text = songSearchResults[indexPath.row].artist
             return cell
         }
         return UITableViewCell()
@@ -38,7 +38,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 else { fatalError ("Unexpected segue") }
             guard let selectedIndexPath = tableViewOutlet.indexPathForSelectedRow else { fatalError("No row selected")
             }
-            songDetailVC.selectedCell = listOfSongs[selectedIndexPath.row]
+            songDetailVC.selectedCell = songSearchResults[selectedIndexPath.row]
         default:
             fatalError("Unexpected segue identifier")
         }
@@ -56,9 +56,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let currentScopeIndex = searchBarOutlet.selectedScopeButtonIndex
                 switch scopeTitles[currentScopeIndex] {
                 case "Song":
-                    return listOfSongs.filter{$0.name.contains(searchString.lowercased())}
+                    return listOfSongs.filter{$0.name.contains(searchString)}
                 case "Artist":
-                    return listOfSongs.filter{$0.artist.contains(searchString.lowercased())}
+                    return listOfSongs.filter{$0.artist.contains(searchString)}
                 default:
                     return listOfSongs
                 }
@@ -70,6 +70,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         didSet {
             self.tableViewOutlet.reloadData()
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchString = searchBar.text
     }
     
     override func viewDidLoad() {
